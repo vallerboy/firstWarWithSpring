@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Checker</title>
+</head>
+<body>
+  <center>
+      <h1>
+          <span th:style="'color:' + (${isValid} ? 'green' : 'red')" th:text="${isValid} ? 'Kod jest poprawny' : 'Kod jest bledny'"></span>
+          <br/>
+          <span th:if="${isValid}">Ale jesteś fajny, znasz kody pocztowe</span>
+      </h1>
+  </center>
+</body>
+</html>
