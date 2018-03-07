@@ -2,6 +2,7 @@ package pl.oskarpolak.springdemostart.controllers;
 
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -29,16 +30,13 @@ public class FormController {
     }
 
     @PostMapping("/register")
-    @ResponseBody
-    public String registerPost(@PathVariable("login") String login,
-                               @PathVariable("password") String password,
-                               @PathVariable("passwordRepeat") String passwordRepeat,
-                               @PathVariable("email") String email){
-        if(password.equals(passwordRepeat)){
-            return "Rejestracja przebiegla pomyslnie";
-        }else{
-            return "Hasła musza byc takie same";
-        }
+    public String registerPost(@RequestParam("login") String login,
+                               @RequestParam("password") String password,
+                               @RequestParam("passwordRepeat") String passwordRepeat,
+                               @RequestParam("email") String email,
+                               Model model){
+        model.addAttribute("isValidRegister", password.equals(passwordRepeat));
+        return "register";
     }
 
 }
