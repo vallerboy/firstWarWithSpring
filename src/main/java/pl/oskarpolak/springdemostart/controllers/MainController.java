@@ -34,7 +34,6 @@ public class MainController {
     public String check(@PathVariable(value = "zip") String zip, Model model){
         String pattern = "[0-9]{2}-[0-9]{3}";//Kod pocztowy
 
-
         model.addAttribute("color", "red");
         model.addAttribute("isValid", Pattern.matches(pattern, zip));
         return "checker";
