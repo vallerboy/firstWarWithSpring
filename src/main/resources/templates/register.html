@@ -10,14 +10,14 @@
 
     <br/>
 
-    <form th:if="${isValidRegister == null or isValidRegister != true}" method="post" action="/register">
-        Login: <input type="text" th:name="login" placeholder="Login"/>
+    <form th:if="${isValidRegister == null or isValidRegister != true}" th:object="${registerForm}" method="post" action="/register">
+        Login: <input type="text" th:field="*{login}" placeholder="Login"/>
         <br/>
-        Hasło: <input type="password" th:name="password" placeholder="Hasło"/>
+        Hasło: <input type="password" th:field="*{password}" placeholder="Hasło"/>
         <br/>
-        Powtórz hasło: <input type="password" th:name="passwordRepeat" placeholder="Powtórz hasło"/>
+        Powtórz hasło: <input type="password" th:field="*{passwordRepeat}" placeholder="Powtórz hasło"/>
         <br/>
-        Email: <input type="email" th:name="email" placeholder="Email"/>
+        Email: <input type="email" th:field="*{email}" placeholder="Email"/>
         <br/>
         <input type="submit" value="Zaloguj się">
     </form>

@@ -27,7 +27,9 @@ public class FormController {
 
     @GetMapping("/register")
     public String register(Model model) {
-        model.addAttribute("registerForm", new RegisterForm());
+        RegisterForm registerForm =  new RegisterForm();
+        registerForm.setEmail("test@test.pl");
+        model.addAttribute("registerForm", registerForm);
         return "register";
     }
 
