@@ -3,6 +3,7 @@ package pl.oskarpolak.springdemostart.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.oskarpolak.springdemostart.models.RegisterForm;
 
@@ -35,7 +36,12 @@ public class FormController {
 
     @PostMapping("/register")
     public String registerPost(@ModelAttribute("registerForm") RegisterForm registerForm,
+                               BindingResult bindingResult,
                                Model model){
+        if(bindingResult.hasErrors()){
+            return "register";
+        }
+
         model.addAttribute("isValidRegister",
                 registerForm.getPassword().equals(registerForm.getPasswordRepeat()));
         return "register";

@@ -11,12 +11,16 @@
     <br/>
 
     <form th:if="${isValidRegister == null or isValidRegister != true}" th:object="${registerForm}" method="post" action="/register">
+        <span th:if="${#fields.hasErrors('login')}" th:errors="*{login}">Error</span>
         Login: <input type="text" th:field="*{login}" placeholder="Login"/>
         <br/>
+        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Error</span>
         Hasło: <input type="password" th:field="*{password}" placeholder="Hasło"/>
         <br/>
+        <span th:if="${#fields.hasErrors('passwordRepeat')}" th:errors="*{passwordRepeat}">Error</span>
         Powtórz hasło: <input type="password" th:field="*{passwordRepeat}" placeholder="Powtórz hasło"/>
         <br/>
+        <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Error</span>
         Email: <input type="email" th:field="*{email}" placeholder="Email"/>
         <br/>
         <input type="submit" value="Zaloguj się">
