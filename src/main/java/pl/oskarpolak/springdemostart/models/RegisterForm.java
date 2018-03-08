@@ -3,6 +3,7 @@ package pl.oskarpolak.springdemostart.models;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -16,6 +17,5 @@ public class RegisterForm {
     private String password;
     @Pattern(regexp = "[a-z]+")
     private String passwordRepeat;
-    @Email
     private String email;
 }

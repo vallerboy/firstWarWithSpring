@@ -1,25 +1,39 @@
 package pl.oskarpolak.springdemostart.controllers;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import pl.oskarpolak.springdemostart.models.LoginForm;
 import pl.oskarpolak.springdemostart.models.RegisterForm;
+
+import javax.validation.Valid;
 
 @Controller
 public class FormController {
 
+    @Autowired
+    MessageSource messageSource;
+
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login() {
+    public String login(Model model) {
+        model.addAttribute("loginForm", new LoginForm());
+        //System.out.println(messageSource.getMessage("test", new Object[]{}, Locale.getDefault()));
         return "login";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
-    public String loginPost(@RequestParam("login") String login,
-                            @RequestParam("password") String password){
-        if(login.equals("oskar") && password.equals("123")) {
+    public String loginPost(@Valid @ModelAttribute("loginForm") LoginForm loginForm,
+                            BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            return "Uzupełnij dane";
+        }
+
+        if(loginForm.getLogin().equals("oskar") && loginForm.getPassword().equals("123")) {
             return "Zalogowno!";
         }
         return "Błędne dane";
@@ -35,7 +49,7 @@ public class FormController {
     }
 
     @PostMapping("/register")
-    public String registerPost(@ModelAttribute("registerForm") RegisterForm registerForm,
+    public String registerPost(@Valid @ModelAttribute("registerForm") RegisterForm registerForm,
                                BindingResult bindingResult,
                                Model model){
         if(bindingResult.hasErrors()){
